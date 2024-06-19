@@ -1,3 +1,31 @@
+<script lang="ts">
+	import { type, version } from '@tauri-apps/plugin-os';
+
+	async function getData() {
+		try {
+			const osType = await type();
+			const osVersion = await version();
+			return {
+				osType,
+				osVersion
+			};
+		} catch (error) {
+			return {
+				osType: 'web',
+				osVersion: '1.0.0'
+			};
+		}
+	}
+</script>
+
+<svelte:head>
+	{#await getData() then { osType }}
+		{#if osType !== 'web'}
+			<meta name="viewport" content="width=device-width, user-scalable=no" />
+		{/if}
+	{/await}
+</svelte:head>
+
 <main>
 	<slot></slot>
 </main>
