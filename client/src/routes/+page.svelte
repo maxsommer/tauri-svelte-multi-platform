@@ -11,7 +11,10 @@
 				osVersion
 			};
 		} catch (error) {
-			throw new Error('Something went wrong.');
+			return {
+				osType: 'web',
+				osVersion: '1.0.0'
+			};
 		}
 	}
 </script>
